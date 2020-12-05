@@ -54,7 +54,7 @@ contract ASTMaker {
         address token0 = pair.token0();
         (uint reserveIn, uint reserveOut) = token0 == token ? (reserve0, reserve1) : (reserve1, reserve0);
         uint amountIn = IERC20(token).balanceOf(address(this));
-        uint amountInWithFee = amountIn.mul(997); // TODO 3% fee
+        uint amountInWithFee = amountIn.mul(997);
         uint numerator = amountInWithFee.mul(reserveOut);
         uint denominator = reserveIn.mul(1000).add(amountInWithFee);
         uint amountOut = numerator / denominator;
@@ -69,7 +69,7 @@ contract ASTMaker {
         (uint reserve0, uint reserve1,) = pair.getReserves();
         address token0 = pair.token0();
         (uint reserveIn, uint reserveOut) = token0 == weth ? (reserve0, reserve1) : (reserve1, reserve0);
-        uint amountInWithFee = amountIn.mul(997); //TODO 3% fee
+        uint amountInWithFee = amountIn.mul(997);
         uint numerator = amountInWithFee.mul(reserveOut);
         uint denominator = reserveIn.mul(1000).add(amountInWithFee);
         uint amountOut = numerator / denominator;

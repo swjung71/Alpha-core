@@ -29,11 +29,9 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
     mapping (address => uint32) public numCheckpoints;
 
     /// @notice The EIP-712 typehash for the contract's domain
-    // Peter gives space after ,
     bytes32 public constant DOMAIN_TYPEHASH = keccak256("'EIP712Domain(string name, uint256 chainId, address verifyingContract)'");
 
     /// @notice The EIP-712 typehash for the delegation struct used by the contract
-    // Peter gives space after ,
     bytes32 public constant DELEGATION_TYPEHASH = keccak256("'Delegation(address delegatee, uint256 nonce, uint256 expiry)'");
 
     /// @notice A record of states for signing / validating signatures
@@ -43,13 +41,11 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
     event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
 
     /// @notice An event thats emitted when a delegate account's vote balance changes
-    // Peter delegatte의 balance가 previousBalance에서 newBalance로 변경될 때 이벤트
     event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
 
     /**
-     * @notice Delegate votes from `msg.sender` to `delegatee`( Peter 대리자)
+     * @notice Delegate votes from `msg.sender` to `delegatee`
      * @param delegator The address to get delegatee for
-     * Peter delagator(내가)가 나의 delegatee(대리자)의 주소를 찾는 함수
      */
     function delegates(address delegator)
     external
@@ -62,7 +58,6 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
     /**
      * @notice Delegate votes from `msg.sender` to `delegatee`
      * @param delegatee The address to delegate votes to
-     * msg.sender (나)의 대리자를 delegatee로 바꿈
      */
     function delegate(address delegatee) external {
         return _delegate(msg.sender, delegatee);
@@ -73,7 +68,7 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
      * @param delegatee The address to delegate votes to
      * @param nonce The contract state required to match the signature
      * @param expiry The time at which to expire the signature
-     * @param v The recovery byte of the signature (Peter ?)
+     * @param v The recovery byte of the signature
      * @param r Half of the ECDSA signature pair
      * @param s Half of the ECDSA signature pair
      */
@@ -88,7 +83,7 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
     external
     {
         bytes32 domainSeparator = keccak256(
-            abi.encode( /// Peter abi encoder : for properly pads
+            abi.encode(
                 DOMAIN_TYPEHASH,
                 keccak256(bytes(name())),
                 getChainId(),
@@ -106,7 +101,7 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
         );
 
         bytes32 digest = keccak256(
-            abi.encodePacked(  /// Peter abi encoder : for unpadded encoding
+            abi.encodePacked(
                 "\x19\x01",
                 domainSeparator,
                 structHash
@@ -114,7 +109,7 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "AST::delegateBySig: invalid signature");// Peter 조건, 에러메시지
+        require(signatory != address(0), "AST::delegateBySig: invalid signature");
         require(nonce == nonces[signatory]++, "AST::delegateBySig: invalid nonce");
         require(now <= expiry, "AST::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
@@ -179,14 +174,12 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
         return checkpoints[account][lower].votes;
     }
 
-    // Peter delagator(내가)가 delegatee(대리자)로 대리자를 바꿀 때
     function _delegate(address delegator, address delegatee)
     internal
     {
         address currentDelegate = _delegates[delegator];
         uint256 delegatorBalance = balanceOf(delegator); // balance of underlying ALPHAs (not scaled);
         _delegates[delegator] = delegatee;
-        // Peter delegator가 fromDelegate에서 toDelegate로 변경할 때 이벤트
         emit DelegateChanged(delegator, currentDelegate, delegatee);
 
         _moveDelegates(currentDelegate, delegatee, delegatorBalance);
@@ -194,7 +187,6 @@ contract ASTToken is ERC20("AlphaSwapToken", "AST"), Ownable {
 
     function _moveDelegates(address srcRep, address dstRep, uint256 amount) internal {
         if (srcRep != dstRep && amount > 0) {
-            // Peter address(0)이면 폐기된 것
             if (srcRep != address(0)) {
                 // decrease old representative
                 uint32 srcRepNum = numCheckpoints[srcRep];

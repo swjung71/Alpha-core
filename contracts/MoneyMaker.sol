@@ -70,14 +70,6 @@ contract MoneyMaker is Ownable {
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
-    //todo delete
-    //event pendingAST1(uint256 indexed ASTReward, uint256 indexed accASTPerShare, uint256 lpSupply);
-    //event pendingAST2(uint256 indexed rewardDebt, uint256 indexed reward);
-    //event Deposit1(uint256 indexed rewardDebt);
-    //event Withdraw1(uint256 indexed rewardDEbt);
-
-    //event TestWithdraw(address indexed user, uint256 indexed pid, uint256 amount,
-    //    uint256  poolShare, uint256  pending);
 
     constructor(
         ASTToken _AST,
@@ -181,7 +173,7 @@ contract MoneyMaker is Ownable {
         }
         uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
         uint256 ASTReward = multiplier.mul(ASTPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
-        AST.mint(devaddr, ASTReward.div(10)); // TODO 10% fee
+        AST.mint(devaddr, ASTReward.div(10));
         AST.mint(address(this), ASTReward);
         pool.accASTPerShare = pool.accASTPerShare.add(ASTReward.mul(1e12).div(lpSupply));
         pool.lastRewardBlock = block.number;
