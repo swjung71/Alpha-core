@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="02d9280d-dffa-4b21-8639-43fdf0f1145e" name="Default Changelist" comment="Initial commit">
+    <list default="true" id="02d9280d-dffa-4b21-8639-43fdf0f1145e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contracts/ASTMaker.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/ASTMaker.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contracts/ASTToken.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/ASTToken.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contracts/MoneyMaker.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/MoneyMaker.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +21,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -116,8 +115,18 @@
       <workItem from="1607160742887" duration="71000" />
       <workItem from="1607161226111" duration="289000" />
       <workItem from="1607162872268" duration="1843000" />
-      <workItem from="1607170942876" duration="114000" />
+      <workItem from="1607170942876" duration="489000" />
+      <workItem from="1607171517930" duration="4000" />
+      <workItem from="1607387531472" duration="93000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1607171106853</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607171106853</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
